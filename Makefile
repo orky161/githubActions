@@ -2,7 +2,7 @@
 tag=0
 REPO=orky161
 ORGANIZATION=test
-PROJECT=rabbit_k8s
+PROJECT=github-actions-eks
 IMAGE=${REPO}/${ORGANIZATION}-${PROJECT}:${tag}
 
 build:
