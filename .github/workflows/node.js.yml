@@ -31,6 +31,7 @@ jobs:
       run: |
         echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+        echo "##[set-output name=image;]$(echo pony)"
 
 
     - name: Login to GitHub Container Registry
@@ -39,5 +40,5 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
-    - run: docker image build -t ghcr.io/orky161/dag:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }} .
-    - run: docker push ghcr.io/orky161/dag:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
+    - run: docker image build -t ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }} .
+    - run: docker push ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
