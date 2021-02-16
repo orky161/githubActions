@@ -24,13 +24,14 @@ jobs:
     - run: npm test
 
   build-n-push:
-      needs: setup
+    needs: setup
 
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          node-version: [ 12.x ]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
 
+    steps:
     - name: Declare some variables
       id: vars
       shell: bash
