@@ -31,5 +31,5 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
-    - run: docker image build . -t ghcr.io/orky161/namer:15 -f ./services/profile/Dockerfile
+    - run: docker image build -t ghcr.io/orky161/namer:15 .
     - run: docker push ghcr.io/orky161/namer:15
