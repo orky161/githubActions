@@ -28,6 +28,6 @@ jobs:
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v1
       with:
-        registry: ghcr.io
+        registry: ghcr.io/orky161/namer:2
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
