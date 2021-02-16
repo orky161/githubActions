@@ -7,7 +7,7 @@ describe('Array', () => {
         });
 
         it('should return 3', () => {
-            assert.equal([1, 2, 3].indexOf(3), 2);
+            assert.equal([1, 2, 3].indexOf(3), 20);
         });
     });
 });
