@@ -24,7 +24,7 @@ jobs:
     - run: npm test
 
   build-n-push:
-    needs: setup
+    needs: test
 
     runs-on: ubuntu-latest
     strategy:
