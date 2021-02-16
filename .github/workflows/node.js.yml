@@ -39,5 +39,5 @@ jobs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
-    - run: docker image build -t ghcr.io/orky161/${{ steps.vars.outputs.sha_short }}:16 .
-    - run: docker push ghcr.io/orky161/namer:15
+    - run: docker image build -t ghcr.io/orky161/sus:${{ steps.vars.outputs.sha_short }} .
+    - run: docker push ghcr.io/orky161/namer:sus:${{ steps.vars.outputs.sha_short }}
