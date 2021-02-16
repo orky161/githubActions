@@ -49,5 +49,5 @@ jobs:
 
     - name: Build and push docker image
       run: |
-        docker image build -t ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }} .
-        docker push ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
+        docker image build -t ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.branch }} .
+        docker push ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.branch }}
