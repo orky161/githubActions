@@ -7,10 +7,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [12.x]
@@ -25,13 +23,21 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
+  build-n-push:
+      needs: setup
+
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [ 12.x ]
+
     - name: Declare some variables
       id: vars
       shell: bash
       run: |
         echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-        echo "##[set-output name=image;]$(echo barbur)"
+        echo "##[set-output name=image;]$(echo tap)"
 
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v1
