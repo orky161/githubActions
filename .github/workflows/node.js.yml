@@ -40,4 +40,4 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
     - run: docker image build -t ghcr.io/orky161/sus:${{ steps.vars.outputs.sha_short }} .
-    - run: docker push ghcr.io/orky161/namer:sus:${{ steps.vars.outputs.sha_short }}
+    - run: docker push ghcr.io/orky161/sus:${{ steps.vars.outputs.sha_short }}
