@@ -33,12 +33,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Declare some variables
+    - name: Declare some docker variables
       id: vars
       shell: bash
       run: |
         echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        echo "##[set-output name=sha_short;]$(git rev-parse --short HEAD)"
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
         echo "##[set-output name=image;]$(echo tap)"
 
     - name: Login to GitHub Container Registry
@@ -49,7 +49,7 @@ jobs:
         password: ${{ secrets.CR_PAT }}
 
     - name: Build docker image
-      run: docker image build -t ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.branch }} .
+      run: docker image build -t ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }} .
 
     - name: Push docker image
-      run: docker push ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.branch }}
+      run: docker push ghcr.io/orky161/${{ steps.vars.outputs.image }}:${{ steps.vars.outputs.branch }}-${{ steps.vars.outputs.sha_short }}
