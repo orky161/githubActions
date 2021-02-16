@@ -25,11 +25,19 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
+    - name: Declare some variables
+      id: vars
+      shell: bash
+      run: |
+        echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v1
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
-    - run: docker image build -t ghcr.io/orky161/namer:15 .
+    - run: docker image build -t ghcr.io/orky161/${{ steps.vars.outputs.sha_short }}:16 .
     - run: docker push ghcr.io/orky161/namer:15
