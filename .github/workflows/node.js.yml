@@ -37,20 +37,21 @@ jobs:
       run: echo "::set-output name=image::ghcr.io/orky161/strawberry:${{ env.GITHUB_REF_SLUG }}-${{ env.GITHUB_SHA_SHORT }}"
 
     - run: echo ${{ steps.vars.outputs.image }}
-#    - name: Login to GitHub Container Registry
-#      uses: docker/login-action@v1
-#      with:
-#        registry: ghcr.io
-#        username: ${{ github.repository_owner }}
-#        password: ${{ secrets.CR_PAT }}
-#
-#    - name: Build docker image
-#      run: docker image build -t ${{ steps.vars.outputs.image }} .
-#
-#    - name: Push docker image
-#      run: docker push ${{ steps.vars.outputs.image }}
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.CR_PAT }}
+
+    - name: Build docker image
+      run: docker image build -t ${{ steps.vars.outputs.image }} .
+
+    - name: Push docker image
+      run: docker push ${{ steps.vars.outputs.image }}
+
     outputs:
-      output1: ${{ steps.vars.outputs.image }}
+      image: ${{ steps.vars.outputs.image }}
 
   deploy:
     needs: build-n-push
@@ -58,18 +59,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{ needs.build-n-push.steps.vars.outputs.image }}
-      - run: echo ${{ needs.build-n-push.outputs.output1 }}
-#      - name: AWS Credentials
-#        uses: aws-actions/configure-aws-credentials@v1
-#        with:
-#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          aws-region: us-east-1
-#
-#      - name: helm deploy
-#        uses: koslib/helm-eks-action@master
-#        env:
-#          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-#        with:
-#          command: helm upgrade basic --install --wait ./k8s/helm-service --values ./k8s/values.yaml --set deployment.image=${{ needs.build-n-push.steps.vars.outputs.image }}
+      - name: AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: helm deploy
+        uses: koslib/helm-eks-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          command: helm upgrade basic --install --wait ./k8s/helm-service --values ./k8s/values.yaml --set deployment.image=${{ needs.build-n-push.outputs.image }}
