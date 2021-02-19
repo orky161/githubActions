@@ -28,9 +28,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    outputs:
-      output1: ${{ steps.step1.outputs.image }}
-
     steps:
     - uses: actions/checkout@v2
     - uses: rlespinasse/github-slug-action@v3.x
