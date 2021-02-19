@@ -36,6 +36,7 @@ jobs:
       shell: bash
       run: echo "::set-output name=image::ghcr.io/orky161/strawberry:${{ env.GITHUB_REF_SLUG }}-${{ env.GITHUB_SHA_SHORT }}"
 
+    - run: echo ${{ steps.vars.outputs.image }}
 #    - name: Login to GitHub Container Registry
 #      uses: docker/login-action@v1
 #      with:
