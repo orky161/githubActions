@@ -68,4 +68,4 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          command: helm upgrade basic --install --wait ./k8s/helm-service --values ./k8s/values.yaml --set deployment.image=${{ steps.vars.outputs.image }}
+          command: helm upgrade basic --install --wait ./k8s/helm-service --values ./k8s/values.yaml --set deployment.image=${{ needs.build-n-push.steps.vars.outputs.image }}
