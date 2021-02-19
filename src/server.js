@@ -11,7 +11,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.get("/ping", (req, res) => {
-    res.status(200).json({msg: "pingo"})
+    res.status(200).json({msg: "pingo2"})
 })
 
 app.get("/env", async (req, res) => {
