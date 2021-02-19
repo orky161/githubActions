@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      output1: ghcr.io/orky161/strawberry:${{ env.GITHUB_REF_SLUG }}-${{ env.GITHUB_SHA_SHORT }}
+      output1: "namer"
 
     steps:
     - uses: actions/checkout@v2
