@@ -28,9 +28,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    outputs:
-      output1: ${{ steps.step1.outputs.image }}
-
     steps:
     - uses: actions/checkout@v2
     - uses: rlespinasse/github-slug-action@v3.x
@@ -52,6 +49,8 @@ jobs:
 #
 #    - name: Push docker image
 #      run: docker push ${{ steps.vars.outputs.image }}
+    outputs:
+      output1: ${{ steps.vars.outputs.image }}
 
   deploy:
     needs: build-n-push
