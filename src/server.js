@@ -11,7 +11,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.get("/ping", (req, res) => {
-    res.status(200).json({msg: "ping"})
+    res.status(200).json({msg: "pingo"})
 })
 
 app.get("/env", async (req, res) => {
@@ -19,6 +19,6 @@ app.get("/env", async (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening at http://localhost:${port}`, new Date())
 })
 
