@@ -28,6 +28,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    outputs:
+      output1: ${{ steps.step1.outputs.image }}
+
     steps:
     - uses: actions/checkout@v2
     - uses: rlespinasse/github-slug-action@v3.x
@@ -37,7 +40,6 @@ jobs:
       run: echo "::set-output name=image::ghcr.io/orky161/strawberry:${{ env.GITHUB_REF_SLUG }}-${{ env.GITHUB_SHA_SHORT }}"
 
     - run: echo ${{ steps.vars.outputs.image }}
-    - run: echo ${{ outputs.output1 }}
 #    - name: Login to GitHub Container Registry
 #      uses: docker/login-action@v1
 #      with:
