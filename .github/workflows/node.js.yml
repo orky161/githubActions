@@ -50,7 +50,7 @@ jobs:
         password: ${{ secrets.CR_PAT }}
 
     - name: Build docker image
-      run: docker image build -t ghcr.io/orky161/${{ steps.vars.outputs.image }} .
+      run: docker image build -t ghcr.io/orky161/${{ steps.vars.outputs.IMAGE }} .
 
     - name: Push docker image
-      run: docker push ghcr.io/orky161/${{ steps.vars.outputs.image }}
+      run: docker push ghcr.io/orky161/${{ steps.vars.outputs.IMAGE }}
