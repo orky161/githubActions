@@ -71,4 +71,4 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          command: helm upgrade basic --install --wait ./k8s/helm-service --values ./k8s/values.yaml --set deployment.tag=master-06886541 --set deployment.image=ghcr.io/orky161/strawberry:master-d3b3196f
+          command: helm upgrade basic --install --wait ./k8s/helm-service --values ./k8s/values.yaml --set deployment.tag=master-d3b3196f --set deployment.image=ghcr.io/orky161/strawberry
