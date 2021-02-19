@@ -1,8 +1,6 @@
 name: githubactions
+namespace: dev
 port: 9000
 deployment:
   replicas: 2
-  env:
-    MYSQL_HOST: "172.28.160.1"
 
-authService: githubactions-service
