@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        run: echo ${{ needs.build-n-push.steps.vars.outputs.image }}
+      - run: echo ${{ needs.build-n-push.steps.vars.outputs.image }}
 #      - name: AWS Credentials
 #        uses: aws-actions/configure-aws-credentials@v1
 #        with:
